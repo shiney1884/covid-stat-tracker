@@ -2,13 +2,12 @@ import React, {useState, useEffect, useContext} from "react";
 import { CovidContext } from "./CovidContext";
 
 export const SearchBar = () => {
-
-    const [results, setResults] = useContext(CovidContext);  
+    const [results, setResults] = useContext(CovidContext)
     const [searchInput, setSearchInput] = useState('')
     const [country, setCountry] = useState('')
 
     useEffect(() => {
-        fetch("https://covid-193.p.rapidapi.com/statistics?country=Brazil", {
+        fetch(`https://covid-193.p.rapidapi.com/statistics?country=${country}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "e14e0779c1mshb588041296e6664p1507c2jsn8f48804c2873",
@@ -19,7 +18,7 @@ export const SearchBar = () => {
         .then(result => setResults({
             cases: result.response[0].cases,
             deaths: result.response[0].deaths,
-            tests: result.response[0].deaths
+            tests: result.response[0].tests
         }))
         .catch(err => console.error(err));
 
@@ -27,7 +26,6 @@ export const SearchBar = () => {
 
     const formOnChange = (e) => {
         setSearchInput(e.target.value);
-        console.log(searchInput)
     }
 
     const formSubmit = (e) => {

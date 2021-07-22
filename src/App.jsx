@@ -2,23 +2,19 @@ import Cases from "./Cases";
 import Deaths from "./Deaths";
 import Tests from "./Tests";
 import {SearchBar} from "./SearchBar";
-import {CovidContext} from './CovidContext'
-import { useState } from "react";
+import { CovidProvider } from "./CovidContext";
 
 function App() {
-
-  const [results, setResults] = useState(null)
-
   return (
     <div className="App">
+      <CovidProvider>
       <SearchBar/>
-      <div className="flex justify-evenly">
-        <CovidContext.Provider value={results}>
-          <Cases/>
-          <Deaths/>
-          <Tests/>
-        </CovidContext.Provider>
-      </div>
+          <div className="flex justify-evenly">
+                <Cases/>
+                <Deaths/>
+                <Tests/>
+          </div>
+        </CovidProvider>
     </div>
   );
 }
