@@ -24,6 +24,8 @@ export const SearchBar = () => {
 
     }, [country])
 
+    console.log(results)
+
     const formOnChange = (e) => {
         setSearchInput(e.target.value);
     }
